@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script>
+        function setCookie(cname,cvalue,exdays) {
+            const d = new Date();
+            d.setTime(d.getTime() + (exdays*24*60*60*1000));
+            let expires = "expires=" + d.toGMTString();
+            document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+        }
+
+        function getCookie(cname) {
+            let name = cname + "=";
+            let decodedCookie = decodeURIComponent(document.cookie);
+            let ca = decodedCookie.split(';');
+            for(let i = 0; i < ca.length; i++) {
+                let c = ca[i];
+                while (c.charAt(0) == ' ') {
+                    c = c.substring(1);
+                }
+                if (c.indexOf(name) == 0) {
+                    return c.substring(name.length, c.length);
+                }
+            }
+            return "";
+        }
+
+        function checkCookie() {
+            let user = getCookie("username");
+            if (user != "") {
+                alert("Welcome again " + user);
+            } else {
+                user = prompt("Please enter your name:","");
+                if (user != "" && user != null) {
+                    setCookie("username", user, 30);
+                }
+            }
+        }
+    </script>
+    <meta charset="UTF-8">
+    <title>Sherwin Dewan</title>
+</head>
+<body onload="checkCookie()">
+    <h1> Greetings, my fellow visitor.</h1>
+    <h2><em>Welcome to my website!</em></h2>
+    <p>I hope you are having a wonderful, productive day. Have a cookie.</p>
+    <img alt="cute cookie" src="cutecookie.png" style="width:400px;height:470px;margin-left:15px;">
+</body>
+
+<footer>
+    <br>
+    <p>&copy; 2021, Sherwin Dewan. | Terms of Use | Privacy Statement</p>
+</footer>
+</html>
